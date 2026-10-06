@@ -1,8 +1,8 @@
 class DashboardController < ApplicationController
   def index
-    @group = Group.first
-    @members = Member.where(group_id: @group&.id).order(:display_name)
-    @approved_savings = Saving.where(status: "approved").sum(:amount)
-    @active_loans = Loan.where(status: "active").sum(:balance)
+    @member = Member.find_by(user_id: current_user.id)
+    @savings = @member ? Saving.where(member_id: @member.id).order(created_at: :desc) : Saving.none
+    @group = @member&.group || Group.first
+    @total_savings = Saving.where(status: "approved").sum(:amount)
   end
 end
