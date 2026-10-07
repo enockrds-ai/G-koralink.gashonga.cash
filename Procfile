@@ -1,1 +1,1 @@
-web: bundle exec rails server -b 0.0.0.0 -p $PORT
+web: bundle exec puma -b tcp://0.0.0.0:${PORT:-8080} server.ru
