@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="rw">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= content_for?(:title) ? yield(:title) : "G-KORALINK" %></title>
+  <%= csrf_meta_tags %>
+  <style>
+    :root{--navy:#07111f;--gold:#d8ad42;--red:#c83d3d;--bg:#f4f6f9;--card:#fff;--text:#162033;--muted:#697386;--line:#e5e8ee}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+    a{text-decoration:none;color:inherit}.top{background:linear-gradient(135deg,#06101d,#11263e);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 5px 24px #07111f20}
+    .topin{max-width:1180px;margin:auto;padding:15px 18px;display:flex;align-items:center;gap:18px}.brand{font-weight:900;letter-spacing:.5px}.brand small{display:block;color:#b9c5d6;font-size:11px;font-weight:500}
+    .nav{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.nav a{padding:9px 11px;border-radius:9px;color:#dfe7f1;font-size:13px}.nav a:hover{background:#ffffff12}
+    .logout button{background:#ffffff12;color:#fff;border:1px solid #ffffff25;border-radius:9px;padding:9px 12px}
+    .wrap{max-width:1180px;margin:auto;padding:28px 18px 50px}.hero{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:22px}.hero h1{margin:0 0 5px;font-size:30px}.muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 7px 22px #07111f0a}.metric{font-size:25px;font-weight:900;margin-top:8px}.label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .sections{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px}.card h2,.card h3{margin-top:0}.formrow{display:flex;gap:9px;flex-wrap:wrap}.formrow>*{flex:1;min-width:120px}input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}button,.btn{display:inline-block;border:0;border-radius:10px;padding:11px 14px;background:var(--navy);color:#fff;font-weight:800;cursor:pointer}.gold{background:var(--gold);color:#151515}.danger{background:var(--red)}.pill{display:inline-block;padding:5px 9px;border-radius:99px;background:#eef2f7;font-size:12px;font-weight:800}
+    .list{display:grid;gap:9px}.item{padding:11px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.flash{padding:12px 14px;border-radius:11px;background:#fff8dd;border:1px solid #f0df9d;margin-bottom:14px}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.sections{grid-template-columns:1fr}.nav{width:100%;margin-left:0}.topin{flex-wrap:wrap}.hero{align-items:start;flex-direction:column}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}.wrap{padding:20px 12px 40px}.hero h1{font-size:24px}}
+  </style>
+</head>
+<body>
+<header class="top"><div class="topin">
+  <a class="brand" href="/dashboard">G-KORALINK<small><%= @group&.name || "Gashonga KoraLink Saving" %></small></a>
+  <% if current_user %>
+  <nav class="nav">
+    <a href="/dashboard">Dashboard</a><a href="/members">Abanyamuryango</a><a href="/notifications">Ubutumwa</a>
+    <% if current_user.role.to_s=="admin" %><a href="/admin">ADMIN</a><% end %>
+    <form class="logout" action="/logout" method="post"><%= hidden_field_tag :_method, "delete" %><%= submit_tag "Sohoka" %></form>
+  </nav>
+  <% end %>
+</div></header>
+<main class="wrap">
+  <% if flash[:alert] %><div class="flash"><%= flash[:alert] %></div><% end %>
+  <% if flash[:notice] %><div class="flash"><%= flash[:notice] %></div><% end %>
+  <%= yield %>
+</main>
+</body>
+</html>
