@@ -1,0 +1,8 @@
+<main style="max-width:800px;margin:30px auto;font-family:Arial;padding:20px">
+<h1>UBUTUMWA</h1>
+<% @notifications.each do |n| %>
+<article style="border:1px solid #ddd;border-radius:10px;padding:12px;margin:10px 0">
+<strong><%= n.title %></strong><p><%= n.body %></p><small><%= n.created_at %></small>
+</article>
+<% end %>
+<p><%= link_to "Dashboard",dashboard_path %></p></main>
