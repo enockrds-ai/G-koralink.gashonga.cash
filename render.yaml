@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: g-koralink
+    runtime: ruby
+    plan: free
+    buildCommand: bundle install
+    startCommand: bundle exec puma -b tcp://0.0.0.0:$PORT server.ru
+    healthCheckPath: /health
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY_BASE
+        sync: false
