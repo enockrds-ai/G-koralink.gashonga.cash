@@ -1,16 +1,20 @@
-<main style="max-width:1000px;margin:30px auto;font-family:Arial;padding:20px">
-<h1>G-KORALINK ADMIN</h1>
-<h2>ABANYAMURYANGO BATEGEREJE</h2>
-<% @pending_members.each do |m| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0"><b><%= m.display_name %></b> — <%= m.phone %>
-<%= button_to "EMEZA",admin_approve_member_path(m),method: :post %><%= button_to "HAKANA",admin_reject_member_path(m),method: :post %></div><% end %>
-<h2>UBWIZIGAME BUBITEGEREJE</h2>
-<% @pending_savings.each do |s| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0">RWF <%= s.amount %> — <%= s.note %>
-<%= button_to "EMEZA",admin_approve_saving_path(s),method: :post %><%= button_to "HAKANA",admin_reject_saving_path(s),method: :post %></div><% end %>
-<h2>INGUZANYO ZITEGEREJE</h2>
-<% @pending_loans.each do |l| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0">RWF <%= l.amount %>
-<%= button_to "EMEZA",admin_approve_loan_path(l),method: :post %><%= button_to "HAKANA",admin_reject_loan_path(l),method: :post %></div><% end %>
-<h2>UBWISHYU BWIYONGEYEHO</h2>
-<% @pending_repayments.each do |t| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0">RWF <%= t.amount %> — <%= t.note %>
-<%= button_to "EMEZA",admin_approve_repayment_path(t),method: :post %><%= button_to "HAKANA",admin_reject_repayment_path(t),method: :post %></div><% end %>
-<p><a href="/dashboard">Dashboard</a></p>
-</main>
+<% content_for :title, "Admin | G-KORALINK" %>
+<div class="hero"><div><h1>ADMIN CONTROL</h1><div class="muted">Kwemeza abanyamuryango, ubwizigame, inguzanyo n'ubwishyu.</div></div></div>
+<div class="sections">
+<section class="card"><h2>Abanyamuryango bategereje</h2>
+<% if @pending_members.empty? %><p class="muted">Nta request ihari.</p><% end %>
+<% @pending_members.each do |m| %><div class="item"><b><%= m.display_name %></b> · <%= m.phone %><div style="margin-top:8px"><%= button_to "EMEZA",admin_approve_member_path(m),method: :post,class:"gold" %> <%= button_to "HAKANA",admin_reject_member_path(m),method: :post,class:"danger" %></div></div><% end %>
+</section>
+<section class="card"><h2>Ubwizigame butegereje</h2>
+<% if @pending_savings.empty? %><p class="muted">Nta request ihari.</p><% end %>
+<% @pending_savings.each do |s| %><div class="item"><b><%= number_with_delimiter(s.amount) %> RWF</b> · <%= s.note %><div style="margin-top:8px"><%= button_to "EMEZA",admin_approve_saving_path(s),method: :post,class:"gold" %> <%= button_to "HAKANA",admin_reject_saving_path(s),method: :post,class:"danger" %></div></div><% end %>
+</section>
+<section class="card"><h2>Inguzanyo zitegereje</h2>
+<% if @pending_loans.empty? %><p class="muted">Nta request ihari.</p><% end %>
+<% @pending_loans.each do |l| %><div class="item"><b><%= number_with_delimiter(l.amount) %> RWF</b> · Member #<%= l.member_id %><div style="margin-top:8px"><%= button_to "EMEZA",admin_approve_loan_path(l),method: :post,class:"gold" %> <%= button_to "HAKANA",admin_reject_loan_path(l),method: :post,class:"danger" %></div></div><% end %>
+</section>
+<section class="card"><h2>Ubwishyu butegereje</h2>
+<% if @pending_repayments.empty? %><p class="muted">Nta request ihari.</p><% end %>
+<% @pending_repayments.each do |t| %><div class="item"><b><%= number_with_delimiter(t.amount) %> RWF</b> · <%= t.note %><div style="margin-top:8px"><%= button_to "EMEZA",admin_approve_repayment_path(t),method: :post,class:"gold" %> <%= button_to "HAKANA",admin_reject_repayment_path(t),method: :post,class:"danger" %></div></div><% end %>
+</section>
+</div>
