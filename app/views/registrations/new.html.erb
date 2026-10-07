@@ -1,0 +1,14 @@
+<% content_for :title, "Kwiyandikisha | G-KORALINK" %>
+<div style="max-width:470px;margin:20px auto">
+  <div class="card">
+    <h1>G-KORALINK</h1><p class="muted">Fungura konti y'umunyamuryango</p>
+    <%= form_with url: register_path, method: :post, local: true do %>
+      <p><label>Amazina</label><input name="display_name" autocomplete="name" required></p>
+      <p><label>Telefoni (imibare 10)</label><input name="phone" inputmode="numeric" pattern="\d{10}" maxlength="10" required></p>
+      <p><label>Passcode y'imibare 5</label><input id="reg-pass" name="password" type="password" inputmode="numeric" pattern="\d{5}" maxlength="5" required></p>
+      <p><label><input type="checkbox" onclick="document.getElementById('reg-pass').type=this.checked?'text':'password'"> Erekana passcode</label></p>
+      <button class="gold" type="submit">FUNGURA KONTI</button>
+    <% end %>
+    <p class="muted">Usanzwe ufite konti? <a href="/login" style="font-weight:800">Injira</a></p>
+  </div>
+</div>
