@@ -1,4 +1,4 @@
-require_relative "boot"
+require "bundler/setup"
 require "rails/all"
 Bundler.require(*Rails.groups)
 module Gkoralink
