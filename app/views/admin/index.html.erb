@@ -1,0 +1,13 @@
+<main style="max-width:1000px;margin:30px auto;font-family:Arial;padding:20px">
+<h1>G-KORALINK ADMIN</h1>
+<h2>ABANYAMURYANGO BATEGEREJE</h2>
+<% @pending_members.each do |m| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0"><b><%= m.display_name %></b> — <%= m.phone %>
+<%= button_to "EMEZA",admin_approve_member_path(m),method: :post %>
+<%= button_to "HAKANA",admin_reject_member_path(m),method: :post %></div><% end %>
+<h2>UBWIZIGAME BUBITEGEREJE</h2>
+<% @pending_savings.each do |s| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0">RWF <%= s.amount %> — <%= s.note %>
+<%= button_to "EMEZA",admin_approve_saving_path(s),method: :post %><%= button_to "HAKANA",admin_reject_saving_path(s),method: :post %></div><% end %>
+<h2>INGUZANYO ZITEGEREJE</h2>
+<% @pending_loans.each do |l| %><div style="padding:12px;border:1px solid #ddd;margin:8px 0">RWF <%= l.amount %>
+<%= button_to "EMEZA",admin_approve_loan_path(l),method: :post %><%= button_to "HAKANA",admin_reject_loan_path(l),method: :post %></div><% end %>
+</main>
