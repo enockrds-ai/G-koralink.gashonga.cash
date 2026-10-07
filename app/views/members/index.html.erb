@@ -1,0 +1,6 @@
+<main style="max-width:900px;margin:30px auto;font-family:Arial,sans-serif;padding:20px">
+<h1>ABANYAMURYANGO</h1><p>Abanyamuryango mubana mu itsinda</p>
+<table style="width:100%;border-collapse:collapse"><thead><tr><th>Amazina</th><th>Status</th><th>Code</th></tr></thead><tbody>
+<% @members.each do |m| %><tr><td><%= m.display_name %></td><td><%= m.status %></td><td><%= m.code %></td></tr><% end %>
+</tbody></table>
+<p><%= link_to "Dashboard", dashboard_path %></p></main>
